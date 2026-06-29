@@ -53,17 +53,9 @@ const MIN_THRESHOLD = minThresholdIdx !== -1 && args[minThresholdIdx + 1] !== un
 
 // --- Status normalization (mirrors verify-pipeline.mjs) ---
 const ALIASES = {
-  'evaluada': 'evaluated', 'condicional': 'evaluated', 'hold': 'evaluated',
-  'evaluar': 'evaluated', 'verificar': 'evaluated',
-  'aplicado': 'applied', 'enviada': 'applied', 'aplicada': 'applied',
+  'hold': 'evaluated',
   'applied': 'applied', 'sent': 'applied',
-  'respondido': 'responded',
-  'entrevista': 'interview',
-  'oferta': 'offer',
-  'rechazado': 'rejected', 'rechazada': 'rejected',
-  'descartado': 'discarded', 'descartada': 'discarded',
-  'cerrada': 'discarded', 'cancelada': 'discarded',
-  'no aplicar': 'skip', 'no_aplicar': 'skip', 'monitor': 'skip', 'geo blocker': 'skip',
+  'monitor': 'skip', 'geo blocker': 'skip',
 };
 
 function normalizeStatus(raw) {

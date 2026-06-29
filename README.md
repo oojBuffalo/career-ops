@@ -1,7 +1,5 @@
 # Career-Ops
 
-[English](README.md) | [Español](README.es.md) | [Français](README.fr.md) | [Português (Brasil)](README.pt-BR.md) | [한국어](README.ko-KR.md) | [日本語](README.ja.md) | [简体中文](README.cn.md) | [繁體中文](README.zh-TW.md) | [Українська](README.ua.md) | [Русский](README.ru.md) | [Polski](README.pl.md) | [Dansk](README.da.md) | [العربية](README.ar.md)
-
 <p align="center">
   <a href="https://x.com/santifer"><img src="docs/hero-banner.jpg" alt="Career-Ops Multi-Agent Job Search System" width="800"></a>
 </p>
@@ -154,7 +152,7 @@ opencode # Or use OpenCode
 
 # Then ask your CLI to adapt the system to you:
 # "Change the archetypes to backend engineering roles"
-# "Translate the modes to English"
+# "Tighten the location filter to US-only roles"
 # "Add these 5 companies to portals.yml"
 # "Update my profile with this CV I'm pasting"
 
@@ -244,7 +242,7 @@ Career-ops is a single slash command with multiple modes:
 /career-ops tracker        → View application status
 /career-ops apply          → Fill application forms with AI
 /career-ops pipeline       → Process pending URLs
-/career-ops contacto       → LinkedIn outreach message
+/career-ops outreach       → LinkedIn outreach message
 /career-ops deep           → Deep company research
 /career-ops training       → Evaluate a course/cert
 /career-ops project        → Evaluate a portfolio project
@@ -279,13 +277,12 @@ You paste a job URL or description
 The scanner comes with **45+ companies** ready to scan and **19 search queries** across major job boards. Copy `templates/portals.example.yml` to `portals.yml` and add your own:
 
 **AI Labs:** Anthropic, OpenAI, Mistral, Cohere, LangChain, Pinecone
-**Voice AI:** ElevenLabs, PolyAI, Parloa, Hume AI, Deepgram, Vapi, Bland AI
+**Voice AI:** ElevenLabs, Hume AI, Deepgram, Vapi, Bland AI
 **AI Platforms:** Retool, Airtable, Vercel, Temporal, Glean, Arize AI
 **Contact Center:** Ada, LivePerson, Sierra, Decagon, Talkdesk, Genesys
 **Enterprise:** Salesforce, Twilio, Gong, Dialpad
-**LLMOps:** Langfuse, Weights & Biases, Lindy, Cognigy, Speechmatics
+**LLMOps:** Weights & Biases, Lindy
 **Automation:** n8n, Zapier, Make.com
-**European:** Factorial, Attio, Tinybird, Clarity AI, Travelperk
 
 **Job boards searched:** Ashby, Greenhouse, Lever, Wellfound, Workable, RemoteFront
 
@@ -323,7 +320,7 @@ career-ops/
 │   └── profile.example.yml      # Template for your profile
 ├── modes/                       # 15 skill modes
 │   ├── _shared.md               # Shared context (customize this)
-│   ├── oferta.md                # Single evaluation
+│   ├── offer.md                 # Single evaluation
 │   ├── pdf.md                   # PDF generation
 │   ├── cover.md                 # Cover letter generation
 │   ├── scan.md                  # Portal scanner

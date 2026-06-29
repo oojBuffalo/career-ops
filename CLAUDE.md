@@ -17,7 +17,7 @@ There are two layers. Read `DATA_CONTRACT.md` for the full list.
 - `data/*`, `reports/*`, `output/*`, `interview-prep/*`
 
 **System Layer (auto-updatable, DON'T put user data here):**
-- `modes/_shared.md`, `modes/oferta.md`, all other modes
+- `modes/_shared.md`, `modes/offer.md`, all other modes
 - `CLAUDE.md`, `*.mjs` scripts, `dashboard/*`, `templates/*`, `batch/*`
 
 **THE RULE: When the user asks to customize anything, write to the USER layer, NEVER to a system file — that is what survives `node update-system.mjs`.**
@@ -131,7 +131,7 @@ You can invoke the command center or any of its modes directly within your CLI:
 * `cover` — Generate cover letter
 * `interview-prep` — Generate interview preparation guide
 * `interview` — Onboarding/on-demand interview
-* `contacto` — Generate LinkedIn outreach message
+* `outreach` — Generate LinkedIn outreach message
 * `deep` — Execute deep company research
 * `training` — Evaluate course/cert against North Star
 * `project` — Evaluate portfolio project idea
@@ -241,28 +241,14 @@ This system is designed to be customized by YOU (AI Agent). When the user asks y
 - "Change the CV template design" → edit `templates/cv-template.html`
 - "Adjust the scoring weights" → edit `modes/_profile.md` for user-specific weighting, or edit `modes/_shared.md` and `batch/batch-prompt.md` only when changing the shared system defaults for everyone
 
-### Language Modes
-
-Default modes are in `modes/` (English). Language-specific modes live in `modes/{lang}/` — each has `_shared.md`, the eval/apply/`pipeline.md` modes, and a `README.md` documenting that market's vocabulary:
-
-| Language | Dir | Markets |
-|----------|-----|---------|
-| German | `modes/de/` | DACH (Germany, Austria, Switzerland) |
-| French | `modes/fr/` | France, Belgium, Switzerland, Luxembourg, Quebec |
-| Japanese | `modes/ja/` | Japan |
-
-**When to use a `{lang}` mode** — if any holds: the user says "use {lang} modes"; `config/profile.yml` sets `language.modes_dir: modes/{lang}`; or you detect a {lang} JD (then suggest switching). Read from `modes/{lang}/` instead of `modes/`.
-
-**When NOT to:** if the user applies to English-language roles — even at French, German, or Japanese companies — use the default English modes.
-
 ### Skill Modes
 
 | If the user... | Mode |
 |----------------|------|
 | Pastes JD or URL | auto-pipeline (evaluate + report + PDF + tracker) |
-| Asks to evaluate offer | `oferta` |
-| Asks to compare offers | `ofertas` |
-| Wants LinkedIn outreach | `contacto` |
+| Asks to evaluate offer | `offer` |
+| Asks to compare offers | `offers` |
+| Wants LinkedIn outreach | `outreach` |
 | Asks for company research | `deep` |
 | Preps for interview at specific company | `interview-prep` |
 | Wants interactive profile/CV onboarding | `interview` |
@@ -362,7 +348,7 @@ Write one TSV file per evaluation to `batch/tracker-additions/{num}-{company-slu
 
 1. **NEVER edit applications.md to ADD new entries** -- Write TSV in `batch/tracker-additions/` and `merge-tracker.mjs` handles the merge.
 2. **YES you can edit applications.md to UPDATE status/notes of existing entries.**
-3. All reports MUST include `**URL:**` in the header (between Score and PDF). Include `**Legitimacy:** {tier}` (see Block G in `modes/oferta.md`).
+3. All reports MUST include `**URL:**` in the header (between Score and PDF). Include `**Legitimacy:** {tier}` (see Block G in `modes/offer.md`).
 4. All statuses MUST be canonical (see `templates/states.yml`).
 5. Health check: `node verify-pipeline.mjs`
 6. Normalize statuses: `node normalize-statuses.mjs`

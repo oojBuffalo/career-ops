@@ -35,28 +35,21 @@ These files contain system logic, scripts, templates, and instructions that impr
 |------|---------|
 | `modes/_shared.md` | Scoring system, global rules, tools |
 | `modes/_custom.template.md` | Template seed for the user's `modes/_custom.md` |
-| `modes/oferta.md` | Evaluation mode instructions |
+| `modes/offer.md` | Evaluation mode instructions |
 | `modes/pdf.md` | PDF generation instructions |
 | `modes/scan.md` | Portal scanner instructions |
 | `modes/batch.md` | Batch processing instructions |
 | `modes/apply.md` | Application assistant instructions |
 | `modes/auto-pipeline.md` | Auto-pipeline instructions |
-| `modes/contacto.md` | LinkedIn outreach instructions |
+| `modes/outreach.md` | LinkedIn outreach instructions |
 | `modes/deep.md` | Research prompt instructions |
-| `modes/regional/*` | Regional market calibration modes |
-| `modes/ofertas.md` | Comparison instructions |
+| `modes/offers.md` | Comparison instructions |
 | `modes/pipeline.md` | Pipeline processing instructions |
 | `modes/project.md` | Project evaluation instructions |
 | `modes/tracker.md` | Tracker instructions |
 | `modes/training.md` | Training evaluation instructions |
 | `modes/patterns.md` | Pattern analysis instructions |
 | `modes/followup.md` | Follow-up cadence instructions |
-| `modes/de/*` | German language modes |
-| `modes/fr/*` | French language modes |
-| `modes/ja/*` | Japanese language modes |
-| `modes/pl/*` | Polish language modes |
-| `modes/pt/*` | Portuguese language modes |
-| `modes/ru/*` | Russian language modes |
 | `modes/heuristics/*` | Shared candidate-facing application heuristics |
 | `CLAUDE.md` | Agent instructions (Claude Code) |
 | `OPENCODE.md` | Agent instructions (OpenCode) |

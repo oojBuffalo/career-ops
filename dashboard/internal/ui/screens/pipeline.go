@@ -1308,7 +1308,7 @@ func (m PipelineModel) renderPreview() string {
 }
 
 // previewOutcome returns "what happened" to a closed-out application — the raw
-// status (which often carries the decision date, e.g. "descartado 2026-03-12")
+// status (which often carries the decision date, e.g. "discarded 2026-03-12")
 // plus the tracker notes holding the reason. Returns "" for apps still in play.
 func previewOutcome(app model.CareerApplication) string {
 	switch data.NormalizeStatus(app.Status) {
