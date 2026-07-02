@@ -1,4 +1,4 @@
-# Mode: contacto -- LinkedIn Power Move
+# Mode: outreach -- LinkedIn Power Move
 
 > Apply `voice-dna.md` (if present) to every generated message — full guardrail, conversational voice included (Tier 1 + Tier 2). See `_shared.md` → Voice DNA.
 

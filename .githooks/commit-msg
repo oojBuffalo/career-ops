@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# commit-msg hook: strip Claude / AI co-author and attribution trailers so they
+# never appear in commit messages (and therefore never in PRs built from them).
+#
+# Removes:
+#   - "Co-authored-by:" lines that name Claude or Anthropic
+#   - "Claude-Session:" links
+#   - "Generated with [Claude Code]" lines (with or without the leading emoji)
+#
+# Legitimate human co-authors are preserved.
+#
+# Activated per clone with:  git config core.hooksPath .githooks
+
+msg_file="$1"
+[ -n "$msg_file" ] && [ -f "$msg_file" ] || exit 0
+
+tmp="$(mktemp)" || exit 0
+
+grep -viE \
+  '(^[[:space:]]*co-authored-by:.*(claude|anthropic))|(^[[:space:]]*claude-session:)|(generated with[[:space:]]*\[?claude code)' \
+  "$msg_file" > "$tmp"
+
+# Drop any blank lines left dangling at the end of the trimmed message.
+awk 'NF{last=NR} {line[NR]=$0} END{for (i=1; i<=last; i++) print line[i]}' "$tmp" > "$msg_file"
+
+rm -f "$tmp"
+exit 0

@@ -1,6 +1,6 @@
 # CV -- Sam Rivera
 
-**Location:** Berlin, Germany (remote-friendly, EU timezones)
+**Location:** Austin, TX (remote-friendly, US timezones)
 **Email:** sam@example.com
 **LinkedIn:** linkedin.com/in/sam-rivera-example
 **Portfolio:** sam-rivera.example.dev
@@ -18,7 +18,7 @@ Two jobs at once for the last four years: senior AI engineer at a knowledge-grap
 
 ## Work Experience
 
-### Knowledge-Graph SaaS GmbH -- Berlin
+### Knowledge-Graph SaaS Inc. -- Austin, TX
 **Senior AI Engineer / Team Lead**
 2022-2026
 
@@ -28,7 +28,7 @@ Two jobs at once for the last four years: senior AI engineer at a knowledge-grap
 - Ran a team of three engineers and one designer. Weekly architecture review, pair programming on Tuesdays, an on-call rotation that went from "we don't have one" to a 30-minute response SLO with a written playbook.
 - Built the customer-facing eval dashboard: latency, cost-per-query, hallucination rate, retrieval precision and recall. We walked through it with customers in their monthly business reviews.
 
-### Applied AI Bootcamp -- Berlin (parallel role, same window)
+### Applied AI Bootcamp -- Austin, TX (parallel role, same window)
 **Lead Instructor, AI Engineering Track**
 2022-2026
 
@@ -62,12 +62,12 @@ Two jobs at once for the last four years: senior AI engineer at a knowledge-grap
 
 ## Education
 
-- BSc Computer Science, TU Example (2017)
+- BSc Computer Science, Example State University (2017)
 - Self-directed: Andrew Ng MLOps specialization, fast.ai Part 1+2, hand-rolled implementations of attention + RAG from scratch.
 
 ## Speaking and writing
 
-- "Why your bootcamp's LLM module is wrong" -- BerlinML meetup, 2025. ~120 in the room.
+- "Why your bootcamp's LLM module is wrong" -- Austin ML meetup, 2025. ~120 in the room.
 - "Production agents, the boring parts" -- internal talk at two partner companies. The boring parts are timeouts and idempotency.
 - About 12 long-form blog posts on agent architecture, eval design, and teaching technical material to working engineers. The eval-design one is the only one I'd link unprompted.
 
@@ -77,4 +77,4 @@ Engineering: TypeScript, Python (daily), Go (I can read it and write small thing
 
 Teaching: curriculum design with Bronze/Silver/Gold/Diamond difficulty tiering, capstone formats, lab vs lecture split. Delivery: lecture, hands-on lab, 1:1 office hours, code review at scale, pair programming. I have taught working engineers (career-changers), university CS students, and internal teams. Assessment work: rubrics, capstone projects, portfolio review, mock-interview design.
 
-Other: public speaking in German and English, technical writing, hiring loop design, mentorship.
+Other: public speaking, technical writing, hiring loop design, mentorship.

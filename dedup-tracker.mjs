@@ -30,7 +30,7 @@ const DRY_RUN = process.argv.includes('--dry-run');
 mkdirSync(dirname(APPS_FILE), { recursive: true });
 
 // Status advancement order (higher = more advanced in pipeline)
-// Aplicado > Rechazado because active application > terminal state
+// Applied > Rejected because active application > terminal state
 const STATUS_RANK = {
   // English canonicals (states.yml labels)
   'skip': 0,
@@ -41,18 +41,6 @@ const STATUS_RANK = {
   'responded': 4,
   'interview': 5,
   'offer': 6,
-  // Spanish aliases — kept for backwards compat with existing tracker data
-  'no_aplicar': 0,
-  'no aplicar': 0,
-  'descartado': 0,
-  'descartada': 0,
-  'rechazado': 1,  // Terminal — below active states
-  'rechazada': 1,
-  'evaluada': 2,
-  'aplicado': 3,
-  'respondido': 4,
-  'entrevista': 5,
-  'oferta': 6,
 };
 
 /**
