@@ -241,4 +241,3 @@ try {
 } catch (e) {
   fail(`smartrecruiters provider tests crashed: ${e.message}`);
 }
-

@@ -412,10 +412,10 @@ search_queries:
     query: '"Forward Deployed Engineer" OR "Deployed Engineer" OR "Deployment Engineer" AI site:job-boards.greenhouse.io OR site:jobs.ashbyhq.com OR site:jobs.lever.co'
     enabled: true
 
-  # -- Remote-friendly Europe boards --
+  # -- Remote-friendly boards --
 
   - name: Remotive — AI/DevRel/SA/FDE
-    query: 'site:remotive.com "AI Engineer" OR "Developer Advocate" OR "Solutions Architect" OR "Forward Deployed" OR "DevRel" Europe'
+    query: 'site:remotive.com "AI Engineer" OR "Developer Advocate" OR "Solutions Architect" OR "Forward Deployed" OR "DevRel" "United States"'
     enabled: true
 
   - name: WeWorkRemotely — AI & DX
@@ -433,7 +433,7 @@ search_queries:
   # -- Specialized AI / Dev-Tools / FDE boards --
 
   - name: ai-jobs.net — DevRel/SA/FDE
-    query: 'site:ai-jobs.net "Developer Advocate" OR "Solutions Architect" OR "Forward Deployed" OR "DevRel" remote Europe'
+    query: 'site:ai-jobs.net "Developer Advocate" OR "Solutions Architect" OR "Forward Deployed" OR "DevRel" remote "United States"'
     enabled: true
 
   - name: ai-jobs.net — Founding/Applied AI
@@ -441,7 +441,7 @@ search_queries:
     enabled: true
 
   - name: fwddeploy.com — Forward Deployed roles
-    query: 'site:fwddeploy.com "Forward Deployed" OR "Deployed Engineer" remote Europe OR EMEA'
+    query: 'site:fwddeploy.com "Forward Deployed" OR "Deployed Engineer" remote "United States"'
     enabled: true
 
   - name: YC Jobs — DevRel/SA/FDE/Founding
@@ -449,19 +449,17 @@ search_queries:
     enabled: true
 
   - name: YC Jobs — Applied AI
-    query: 'site:workatastartup.com "Applied AI" OR "AI Engineer" OR "AI Agent" remote Europe'
+    query: 'site:workatastartup.com "Applied AI" OR "AI Engineer" OR "AI Agent" remote "United States"'
     enabled: true
-
-  # -- Spanish market specialized (high-value for Madrid/Barcelona-based candidates) --
 
   # -- DevRel-specific boards --
 
   - name: DevRelX Jobs
-    query: 'site:devrelx.com/jobs remote OR Europe OR EMEA'
+    query: 'site:devrelx.com/jobs remote "United States"'
     enabled: true
 
   - name: TrueUp — DevRel roles
-    query: 'site:trueup.io/devrel OR site:trueup.io "Developer Advocate" OR "DevRel" remote Europe'
+    query: 'site:trueup.io/devrel OR site:trueup.io "Developer Advocate" OR "DevRel" remote "United States"'
     enabled: true
 
   - name: Remote Rocketship — DevRel
@@ -469,13 +467,13 @@ search_queries:
     enabled: true
 
   - name: DevRel Job board
-    query: 'site:devreljob.com remote OR Europe OR EMEA'
+    query: 'site:devreljob.com remote "United States"'
     enabled: true
 
-  # -- European / global aggregators --
+  # -- Global aggregators --
 
   - name: Himalayas — Remote AI/Dev-tools
-    query: 'site:himalayas.app "AI Engineer" OR "Solutions Architect" OR "Developer Advocate" OR "Forward Deployed" OR "Founding Engineer" Europe'
+    query: 'site:himalayas.app "AI Engineer" OR "Solutions Architect" OR "Developer Advocate" OR "Forward Deployed" OR "Founding Engineer" "United States"'
     enabled: true
 
   - name: Jooble — US Tech Senior
@@ -819,7 +817,7 @@ tracked_companies:
   - name: Parloa
     careers_url: https://job-boards.eu.greenhouse.io/parloa
     api: https://boards-api.greenhouse.io/v1/boards/parloa/jobs
-    notes: "Berlin EMEA. Voice AI enterprise."
+    notes: "Berlin HQ + New York US office. Voice AI enterprise."
     enabled: true
 
   - name: Intercom
@@ -1012,7 +1010,7 @@ tracked_companies:
     careers_url: https://careers.cognigy.com
     scan_method: websearch
     scan_query: '"cognigy" careers "AI" OR "Solutions" OR "Engineer"'
-    notes: "Dusseldorf EMEA. Conversational AI enterprise."
+    notes: "Dusseldorf HQ + US offices. Conversational AI enterprise."
     enabled: true
 
   - name: Speechmatics

@@ -108,4 +108,3 @@ try {
 } catch (e) {
   fail(`breezy provider tests crashed: ${e.message}`);
 }
-

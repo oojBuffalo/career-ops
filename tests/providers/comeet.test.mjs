@@ -142,4 +142,3 @@ try {
 } catch (e) {
   fail(`comeet provider tests crashed: ${e.message}`);
 }
-

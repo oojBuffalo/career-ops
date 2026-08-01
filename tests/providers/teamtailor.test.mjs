@@ -178,4 +178,3 @@ try {
 } catch (e) {
   fail(`teamtailor provider tests crashed: ${e.message}`);
 }
-

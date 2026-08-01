@@ -188,4 +188,3 @@ try {
 } catch (e) {
   fail(`pinpoint provider tests crashed: ${e.message}`);
 }
-

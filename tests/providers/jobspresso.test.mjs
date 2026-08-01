@@ -110,4 +110,3 @@ try {
 } catch (e) {
   fail(`jobspresso provider tests crashed: ${e.message}`);
 }
-

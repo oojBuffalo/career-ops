@@ -134,4 +134,3 @@ try {
 } catch (e) {
   fail(`weworkremotely provider tests crashed: ${e.message}`);
 }
-

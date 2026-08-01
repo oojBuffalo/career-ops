@@ -214,4 +214,3 @@ A mode may tell you to run work in a background subagent (e.g. `scan`, or parall
 - Working demo + metrics > perfection
 - Apply sooner > learn more
 - 80/20 approach, timebox everything
-

@@ -48,4 +48,3 @@ try {
 } catch (e) {
   fail(`SSRF redirect hardening tests crashed: ${e.message}`);
 }
-

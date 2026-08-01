@@ -55,4 +55,3 @@ try {
 } catch (e) {
   fail(`amazon provider tests crashed: ${e.message}`);
 }
-

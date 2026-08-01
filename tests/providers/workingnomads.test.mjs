@@ -117,4 +117,3 @@ try {
 } catch (e) {
   fail(`workingnomads provider tests crashed: ${e.message}`);
 }
-

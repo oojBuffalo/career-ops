@@ -86,16 +86,11 @@ If `$mode` is not a sub-command AND doesn't look like a JD, show discovery.
 
 ## Output Language Directive
 
-Before executing any mode, read `config/profile.yml` if it exists and resolve:
-
-- `language.output` → ISO language code for human-facing output. Default: `en`.
-- `language.modes_dir` → optional market-mode directory. This controls market vocabulary and local evaluation rules only.
+This fork is English-only. All human-facing output is written in English; any `language.output` value in `config/profile.yml` is read for upstream-profile compatibility but always resolves to `en` (`profile-language.mjs` pins it).
 
 Inject this directive after loading the mode instructions and before producing any user-visible content:
 
-> Write all human-facing output in `{language.output}` regardless of the language of these instructions or of the job description. This includes reports, tracker notes, PDFs, cover letters, outreach, interview prep, form answers, and summaries. If `language.modes_dir` supplies market-specific vocabulary, keep the market logic but explain terms in `{language.output}` when needed.
-
-`language.output` is authoritative for prose. `modes_dir` is market context; it must not force the prose language.
+> Write all human-facing output in English regardless of the language of these instructions or of the job description. This includes reports, tracker notes, PDFs, cover letters, outreach, interview prep, form answers, and summaries.
 
 ---
 

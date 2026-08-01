@@ -134,4 +134,3 @@ try {
 } catch (e) {
   fail(`recruitee provider tests crashed: ${e.message}`);
 }
-

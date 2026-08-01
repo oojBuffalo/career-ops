@@ -41,7 +41,7 @@ function main() {
     const id = parts[0]?.trim();
     const status = parts[2]?.trim();
     const report_num = parts[5]?.trim();
-    
+
     if (!id || !report_num || report_num === '-' || report_num === 'report_num') continue;
 
     // Sanitize to prevent path traversal
@@ -64,7 +64,7 @@ function main() {
   }
 
   const reportFiles = fs.existsSync(REPORTS_DIR) ? fs.readdirSync(REPORTS_DIR) : [];
-  
+
   const aggregated = {
     scan: { prompt: 0, completion: 0, cached: 0, isZero: true },
     evaluation: { prompt: 0, completion: 0, cached: 0, isZero: true },
@@ -121,11 +121,11 @@ function main() {
     if (!parsedFromBlock) {
       const inputRegex = /(\d[\d,.]*k?)\s*(?:input|prompt)/i;
       const outputRegex = /(\d[\d,.]*k?)\s*(?:output|completion|candidate)/i;
-      
+
       const lines = logContent.split('\n');
       let promptTokens = 0;
       let completionTokens = 0;
-      
+
       for (const line of lines) {
         if (line.toLowerCase().includes('token') || line.toLowerCase().includes('usage:')) {
           const inM = line.match(inputRegex);

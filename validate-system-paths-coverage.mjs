@@ -73,7 +73,7 @@ function covered(file) {
 
 if (process.argv.includes('--self-test')) {
   console.log('Running validate-system-paths-coverage.mjs self-tests...');
-  
+
   const assert = (condition, message) => {
     if (!condition) {
       console.error(`FAIL: ${message}`);

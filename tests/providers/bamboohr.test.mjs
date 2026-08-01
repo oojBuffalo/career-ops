@@ -102,4 +102,3 @@ try {
 } catch (e) {
   fail(`bamboohr provider tests crashed: ${e.message}`);
 }
-

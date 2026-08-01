@@ -1,35 +1,26 @@
-import yaml from 'js-yaml';
+// profile-language.mjs — output-language resolution for headless engines.
+//
+// This fork is English-only: `language.output` in config/profile.yml is
+// accepted for upstream-profile compatibility but ALWAYS resolves to English.
+// The parse/instruction API shape is kept identical to upstream so engine call
+// sites (`outputLanguageInstruction(parseOutputLanguage(profile))`) merge
+// cleanly, while the resolution itself is pinned.
 
-const DEFAULT_OUTPUT_LANGUAGE = 'en';
+const OUTPUT_LANGUAGE = 'en';
 
-function normalizeOutputLanguage(value) {
-  if (typeof value !== 'string') return DEFAULT_OUTPUT_LANGUAGE;
-  const language = value.trim();
-  if (!language || language.length > 64 || /[\r\n\0]/.test(language)) {
-    return DEFAULT_OUTPUT_LANGUAGE;
-  }
-  return language;
-}
-
-/** Parse language.output from profile YAML, falling back to English. */
-export function parseOutputLanguage(profileYaml) {
-  try {
-    const profile = yaml.load(String(profileYaml ?? '')) || {};
-    return normalizeOutputLanguage(profile?.language?.output);
-  } catch {
-    return DEFAULT_OUTPUT_LANGUAGE;
-  }
+/** Resolve the output language from profile YAML. Always English in this fork. */
+export function parseOutputLanguage() {
+  return OUTPUT_LANGUAGE;
 }
 
 /** Build the canonical output-language rule injected into every model prompt. */
-export function outputLanguageInstruction(language) {
-  const outputLanguage = normalizeOutputLanguage(language);
+export function outputLanguageInstruction() {
   return [
-    `Write all human-facing output in ${outputLanguage}, including the full A–G`,
+    `Write all human-facing output in English, including the full A–G`,
     `evaluation and the machine-readable summary's free-text fields, regardless`,
     `of the language of these instructions or the job description. Keep`,
-    `market-specific terms when relevant, but explain them in ${outputLanguage}`,
-    `when needed. The configured language.output always wins over the job`,
-    `description's language.`,
+    `market-specific terms when relevant, but explain them in English`,
+    `when needed. This system is English-only: the job description's language`,
+    `never changes the output language.`,
   ].join(' ');
 }

@@ -29,7 +29,7 @@ test('checkCompanyMatch', () => {
   assert.ok(checkCompanyMatch('Interview with Acme Corp', 'Acme Corp'));
   assert.ok(checkCompanyMatch('Interview with acme corp', 'Acme Corp'));
   assert.ok(checkCompanyMatch('Interview with AcmeCorp', 'Acme Corp'));
-  
+
   // Chinese matches
   assert.ok(checkCompanyMatch('恭喜简历通过，杭州赢云贸易有限公司邀您面试', '杭州赢云贸易有限公司'));
   // Partial Chinese (omitting '有限公司')
@@ -144,7 +144,7 @@ test('matchCandidates - high confidence with company + role', () => {
     { num: 1, company: 'Acme Corp', role: 'Software Engineer', notes: '' },
     { num: 2, company: '杭州赢云贸易有限公司', role: 'PY01_python开发工程师', notes: '' }
   ];
-  
+
   const candidates = [
     {
       message_id: 'msg1',
@@ -161,16 +161,16 @@ test('matchCandidates - high confidence with company + role', () => {
       signal: 'interview_invite'
     }
   ];
-  
+
   const results = matchCandidates(candidates, apps, []);
-  
+
   assert.equal(results.length, 2);
-  
+
   assert.equal(results[0].application_num, 1);
   assert.equal(results[0].confidence, 'high');
   assert.ok(results[0].signals.includes('company-name'));
   assert.ok(results[0].signals.includes('role-title'));
-  
+
   assert.equal(results[1].application_num, 2);
   assert.equal(results[1].confidence, 'high');
   assert.equal(results[1].company_hint, '杭州赢云贸易有限公司');
@@ -180,7 +180,7 @@ test('matchCandidates - medium confidence domain match', () => {
   const apps = [
     { num: 3, company: 'Tech Startup', role: 'Data Scientist', notes: 'recruiter@techstartup.io' }
   ];
-  
+
   const candidates = [
     {
       message_id: 'msg3',
@@ -190,7 +190,7 @@ test('matchCandidates - medium confidence domain match', () => {
       signal: 'update'
     }
   ];
-  
+
   const results = matchCandidates(candidates, apps, []);
   assert.equal(results[0].application_num, 3);
   assert.equal(results[0].confidence, 'medium');
@@ -202,7 +202,7 @@ test('matchCandidates - ambiguous matches', () => {
     { num: 4, company: 'BigBank', role: 'Backend Dev', notes: '' },
     { num: 5, company: 'BigBank', role: 'Frontend Dev', notes: '' }
   ];
-  
+
   const candidates = [
     {
       message_id: 'msg4',
@@ -212,7 +212,7 @@ test('matchCandidates - ambiguous matches', () => {
       signal: 'interview_invite'
     }
   ];
-  
+
   const results = matchCandidates(candidates, apps, []);
   assert.equal(results[0].application_num, null);
   assert.equal(results[0].confidence, 'low');
@@ -223,7 +223,7 @@ test('matchCandidates - no match', () => {
   const apps = [
     { num: 6, company: 'SmallCo', role: 'Dev', notes: '' }
   ];
-  
+
   const candidates = [
     {
       message_id: 'msg5',
@@ -233,7 +233,7 @@ test('matchCandidates - no match', () => {
       signal: null
     }
   ];
-  
+
   const results = matchCandidates(candidates, apps, []);
   assert.equal(results[0].application_num, null);
   assert.equal(results[0].confidence, 'low');
@@ -379,4 +379,3 @@ test('classifyReply - need action vs scheduling', () => {
   assert.equal(scheduleRes.type, 'Need Action');
   assert.equal(scheduleRes.suggestedTrackerUpdate, 'Interview');
 });
-

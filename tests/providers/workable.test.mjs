@@ -141,4 +141,3 @@ try {
 } catch (e) {
   fail(`workable provider tests crashed: ${e.message}`);
 }
-

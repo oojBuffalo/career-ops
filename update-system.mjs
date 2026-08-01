@@ -33,9 +33,17 @@ import { fileURLToPath, pathToFileURL } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
 
-const CANONICAL_REPO = 'https://github.com/santifer/career-ops.git';
-const RAW_VERSION_URL = 'https://raw.githubusercontent.com/santifer/career-ops/main/VERSION';
-const RELEASES_API = 'https://api.github.com/repos/santifer/career-ops/releases/latest';
+// FORK-AWARE UPDATE SOURCE: this fork (English-only, US-focused) updates from
+// its OWN main, never directly from santifer/career-ops. `apply` re-execs the
+// TARGET repo's updater with the TARGET's SYSTEM_PATHS manifest — pointed at
+// upstream, that manifest would materialize translated mode dirs and
+// oferta-named modes and overwrite fork-modified system files. Upstream
+// releases reach users only through a reviewed merge into the fork's main
+// (fork PR #3 is the worked example), so updating from the fork is always
+// principle-clean.
+const CANONICAL_REPO = 'https://github.com/oojBuffalo/career-ops.git';
+const RAW_VERSION_URL = 'https://raw.githubusercontent.com/oojBuffalo/career-ops/main/VERSION';
+const RELEASES_API = 'https://api.github.com/repos/oojBuffalo/career-ops/releases/latest';
 
 // Matches a semver, with or without a leading `v` and an optional
 // Release Please component prefix (e.g. `career-ops-v1.9.0` → `1.9.0`).
@@ -274,8 +282,6 @@ const SYSTEM_PATHS = [
   'test/cover-resolver.test.mjs',
   'test/pipeline-lock.test.mjs',
   'test/profile-photo.test.mjs',
-  'templates/cv-template.zh-minimal.html',
-  'test/zh-minimal-template.test.mjs',
   'scaffolder/',
   'Dockerfile',
   'docker-compose.yml',

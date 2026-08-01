@@ -89,4 +89,3 @@ try {
 } catch (e) {
   fail(`cryptocurrencyjobs provider tests crashed: ${e.message}`);
 }
-

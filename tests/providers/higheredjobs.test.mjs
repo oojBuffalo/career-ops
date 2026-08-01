@@ -141,4 +141,3 @@ try {
 } catch (e) {
   fail(`higheredjobs provider tests crashed: ${e.message}`);
 }
-

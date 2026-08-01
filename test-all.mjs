@@ -1474,6 +1474,24 @@ if (updateSystemScript.includes("'CODEX.md'")) {
   fail('update-system does not preserve CODEX.md');
 }
 
+// Fork-aware update source (fork PR #3 review): `apply` re-execs the TARGET
+// repo's updater with the TARGET's SYSTEM_PATHS manifest. Pointed at
+// santifer/career-ops, that manifest would materialize translated mode dirs
+// and oferta-named modes and overwrite fork-modified system files — silently
+// undoing the fork on the next update. The update source must be the fork's
+// own main, which only advances through reviewed upstream merges.
+{
+  const updateSource = updateSystemScript.match(/const CANONICAL_REPO = '([^']+)'/)?.[1] ?? '';
+  const versionSource = updateSystemScript.match(/const RAW_VERSION_URL = '([^']+)'/)?.[1] ?? '';
+  const releasesSource = updateSystemScript.match(/const RELEASES_API = '([^']+)'/)?.[1] ?? '';
+  const sources = [updateSource, versionSource, releasesSource];
+  if (sources.every((s) => s.includes('oojBuffalo/career-ops')) && !sources.some((s) => s.includes('santifer'))) {
+    pass('update-system fetches from the fork, not santifer upstream (a direct upstream apply would undo the fork)');
+  } else {
+    fail(`update-system update source must be the fork's own repo, got: ${sources.join(' , ')}`);
+  }
+}
+
 try {
   const {
     DASHBOARD_REBUILD_TIMEOUT_MS,
@@ -2103,7 +2121,7 @@ if (
   autoPipelineMode.includes('closed posting evidence') &&
   autoPipelineMode.includes('Do not continue to Step 1 until this gate is resolved')
 ) {
-  pass('eval modes (oferta/auto-pipeline) gate dead links before evaluation');
+  pass('eval modes (offer/auto-pipeline) gate dead links before evaluation');
 } else {
   fail('eval modes missing liveness gate before evaluation');
 }
@@ -2130,9 +2148,9 @@ if (
   offerMode.includes('⚠️ **Geo-mismatch:** location field says remote, but JD body says') &&
   offerMode.includes('silence is absence of signal, not agreement')
 ) {
-  pass('oferta cross-checks the remote location field against JD-body signals (#1433)');
+  pass('offer cross-checks the remote location field against JD-body signals (#1433)');
 } else {
-  fail('oferta missing geo-mismatch cross-check of location field vs JD body (#1433)');
+  fail('offer missing geo-mismatch cross-check of location field vs JD body (#1433)');
 }
 
 if (
@@ -2141,9 +2159,9 @@ if (
   offerMode.includes('**Work Auth:**') &&
   offerMode.includes('this tier is **NEUTRAL**')
 ) {
-  pass('oferta cross-checks visa sponsorship against candidate work authorization');
+  pass('offer cross-checks visa sponsorship against candidate work authorization');
 } else {
-  fail('oferta missing work-authorization / visa-sponsorship signal in Block A');
+  fail('offer missing work-authorization / visa-sponsorship signal in Block A');
 }
 
 // --- Block G agency licensing check (#2037) ---
@@ -2205,9 +2223,9 @@ if (
     alSection.includes('skip this signal silently') &&
     alSection.includes('not legal advice')
   ) {
-    pass('oferta Block G agency-licensing signal pins the agency-mediated trigger, registry pointer, via={Agency} tracker-note suggestion, jurisdiction derivation, silent skip, not-legal-advice note (#2037)');
+    pass('offer Block G agency-licensing signal pins the agency-mediated trigger, registry pointer, via={Agency} tracker-note suggestion, jurisdiction derivation, silent skip, not-legal-advice note (#2037)');
   } else {
-    fail('oferta Block G missing/incomplete agency-licensing section — needs table reference, agency-mediated trigger ("our client"), registry pointer, via={Agency} tracker-note suggestion (mode never writes the tracker), config/profile.yml jurisdiction derivation, silent skip for no-row jurisdictions, not-legal-advice note (#2037)');
+    fail('offer Block G missing/incomplete agency-licensing section — needs table reference, agency-mediated trigger ("our client"), registry pointer, via={Agency} tracker-note suggestion (mode never writes the tracker), config/profile.yml jurisdiction derivation, silent skip for no-row jurisdictions, not-legal-advice note (#2037)');
   }
 
   // 3. Hard-rule pins: the signal never asserts unlicensed status and never
@@ -2216,9 +2234,9 @@ if (
     alSection.includes('never asserts an agency is unlicensed') &&
     alSection.includes('never fetches or scrapes the registry')
   ) {
-    pass('oferta agency-licensing signal pins the never-assert-unlicensed and never-fetch/scrape-registry hard rules (#2037)');
+    pass('offer agency-licensing signal pins the never-assert-unlicensed and never-fetch/scrape-registry hard rules (#2037)');
   } else {
-    fail('oferta agency-licensing signal missing the hard rules — must state it "never asserts an agency is unlicensed" and "never fetches or scrapes the registry" (#2037)');
+    fail('offer agency-licensing signal missing the hard rules — must state it "never asserts an agency is unlicensed" and "never fetches or scrapes the registry" (#2037)');
   }
 
   // 4. Phrasing discipline holds in the report-facing text: the blockquote
@@ -2465,9 +2483,9 @@ if (
   offerMode.includes('Required HR verification questions when a salary figure exists') &&
   offerMode.includes('Do not present advertised compensation as real take-home pay')
 ) {
-  pass('oferta requires company-type-driven compensation reliability checks');
+  pass('offer requires company-type-driven compensation reliability checks');
 } else {
-  fail('oferta missing durable company-type compensation reliability instructions');
+  fail('offer missing durable company-type compensation reliability instructions');
 }
 
 if (
@@ -2530,9 +2548,9 @@ if (
   offerMode.includes('salary-observations.tsv') &&
   offerMode.includes('advertised_comp')
 ) {
-  pass('oferta pins the verbatim advertised figure (Block D first row + advertised_comp) and gates desired observations on an explicit user ask');
+  pass('offer pins the verbatim advertised figure (Block D first row + advertised_comp) and gates desired observations on an explicit user ask');
 } else {
-  fail('oferta missing Advertised (JD) row, salary-observations.tsv append rule, or advertised_comp requirement');
+  fail('offer missing Advertised (JD) row, salary-observations.tsv append rule, or advertised_comp requirement');
 }
 
 if (
@@ -2685,9 +2703,9 @@ if (
   offerMode.includes('Prior-contact FYI') &&
   offerMode.includes('Not a legitimacy signal')
 ) {
-  pass('oferta mode wires company-history.mjs and keeps the prior-contact FYI out of the legitimacy tier');
+  pass('offer mode wires company-history.mjs and keeps the prior-contact FYI out of the legitimacy tier');
 } else {
-  fail('oferta mode missing company-history.mjs reference, the "Prior-contact FYI" block, or the "Not a legitimacy signal" guardrail');
+  fail('offer mode missing company-history.mjs reference, the "Prior-contact FYI" block, or the "Not a legitimacy signal" guardrail');
 }
 
 // Hygiene must not just be mentioned — it must be documented BEFORE the
@@ -2760,16 +2778,16 @@ if (applyModeDoc.includes('--on YYYY-MM-DD')) {
 }
 
 // --- contacts phonebook wiring (contacts.mjs <-> outreach mode) ---
-const contactoModeDoc = readFile('modes/outreach.md');
+const outreachModeDoc = readFile('modes/outreach.md');
 
 if (
-  contactoModeDoc.includes('data/contacts.tsv') &&
-  contactoModeDoc.includes('contacts.mjs --vcf') &&
-  /never save|never auto-save/i.test(contactoModeDoc)
+  outreachModeDoc.includes('data/contacts.tsv') &&
+  outreachModeDoc.includes('contacts.mjs --vcf') &&
+  /never save|never auto-save/i.test(outreachModeDoc)
 ) {
-  pass('contacto offers to save identified contacts (user-confirmed, never auto) and surfaces the vCard export');
+  pass('outreach offers to save identified contacts (user-confirmed, never auto) and surfaces the vCard export');
 } else {
-  fail('contacto missing the save-to-contacts.tsv step, the no-auto-save rule, or the contacts.mjs --vcf mention');
+  fail('outreach missing the save-to-contacts.tsv step, the no-auto-save rule, or the contacts.mjs --vcf mention');
 }
 
 // ── 9. LOCAL PARSER CONTRACT ────────────────────────────────────
@@ -3097,21 +3115,21 @@ if (
   fail('scan.mjs missing blacklist counter/summary/scan-runs/--include-blacklisted wiring');
 }
 
-// Prompt-level gates (#1742): oferta + auto-pipeline stop before Block A on a
+// Prompt-level gates (#1742): offer + auto-pipeline stop before Block A on a
 // blacklist hit and require an explicit override; apply gates before form
 // filling. All three quote the user's own recorded reason.
 {
-  const ofertaGate = readFile('modes/offer.md');
+  const offerGate = readFile('modes/offer.md');
   const autoGate = readFile('modes/auto-pipeline.md');
   const applyGate = readFile('modes/apply.md');
   if (
-    ofertaGate.includes('## Blacklist gate') && ofertaGate.includes('data/blacklist.md') &&
+    offerGate.includes('## Blacklist gate') && offerGate.includes('data/blacklist.md') &&
     autoGate.includes('Blacklist gate') && autoGate.includes('data/blacklist.md') &&
     applyGate.includes('Blacklist check') && applyGate.includes('data/blacklist.md')
   ) {
     pass('modes gate on data/blacklist.md before evaluation and form filling (#1742)');
   } else {
-    fail('modes missing the data/blacklist.md gate (oferta/auto-pipeline/apply)');
+    fail('modes missing the data/blacklist.md gate (offer/auto-pipeline/apply)');
   }
 }
 
@@ -11241,9 +11259,9 @@ try {
   }
 
   // 55.4 report format blocks (modes/offer.md → web report parser)
-  const ofertaSrc = readFileSync(join(ROOT, 'modes', 'offer.md'), 'utf-8');
+  const offerSrc = readFileSync(join(ROOT, 'modes', 'offer.md'), 'utf-8');
   const REPORT_BLOCKS = ['Block A', 'Block B', 'Block C', 'Block D', 'Block E', 'Block F', 'Block G'];
-  const missingBlocks = REPORT_BLOCKS.filter((b) => !ofertaSrc.includes(`## ${b} `));
+  const missingBlocks = REPORT_BLOCKS.filter((b) => !offerSrc.includes(`## ${b} `));
   if (missingBlocks.length === 0) {
     pass('modes/offer.md keeps the A-G report block structure (new blocks may be appended)');
   } else {
@@ -11639,7 +11657,7 @@ console.log('\n60. Cover-letter template resolver (generate-cover-letter.mjs)');
 // ── 61. INTERVIEW-PREP URL ENTRY (#1816) ────────────────────────
 // Prompt-level slice: prep for a role that was never evaluated. Pins the
 // disambiguation rule (bare URL still routes to auto-pipeline), the
-// report-stays-authoritative rule, the oferta fetch ladder, and the
+// report-stays-authoritative rule, the offer fetch ladder, and the
 // read-only-on-the-pipeline scope guard.
 
 console.log('\n61. Interview-prep URL entry (#1816)');
@@ -11671,7 +11689,7 @@ try {
     prepMode.includes('**JD source:** unconfirmed (fetched without browser)') &&
     prepMode.includes('Never fabricate JD content')
   ) {
-    pass('interview-prep URL entry quotes the oferta fetch ladder (Playwright first, WebFetch fallback marks JD source unconfirmed)');
+    pass('interview-prep URL entry quotes the offer fetch ladder (Playwright first, WebFetch fallback marks JD source unconfirmed)');
   } else {
     fail('interview-prep URL entry missing the canonical fetch ladder (browser_navigate/browser_snapshot first, marked WebFetch fallback, no fabricated JD)');
   }
@@ -12222,7 +12240,7 @@ console.log('\n67. Protected-grounds question detection (#2030)');
 
 console.log('\n68. Immigration-status requirement overreach (#2033)');
 
-// --- immigration-status requirement overreach (#2033): table + oferta Block G + apply Step 5d ---
+// --- immigration-status requirement overreach (#2033): table + offer Block G + apply Step 5d ---
 {
   // 1. Table exists, parses as YAML, both seeds complete — INCLUDING a
   //    non-empty lawful_screening_contrast on EVERY row (the field that
@@ -12286,11 +12304,11 @@ console.log('\n68. Immigration-status requirement overreach (#2033)');
   // 2. Mode section structure: offer signal (jurisdiction derivation,
   //    exceptions honesty, ITAR note) + apply step (status-vs-authorization
   //    rule, never-auto-answer guarantees).
-  const ofertaNow = readFile('modes/offer.md');
+  const offerNow = readFile('modes/offer.md');
   const applyNow = readFile('modes/apply.md');
-  const sigStart = ofertaNow.indexOf('**11. Immigration-Status Requirement Overreach**');
-  const sigEnd = ofertaNow.indexOf('### Output format:', Math.max(sigStart, 0));
-  const sigSection = sigStart >= 0 && sigEnd > sigStart ? ofertaNow.slice(sigStart, sigEnd) : '';
+  const sigStart = offerNow.indexOf('**11. Immigration-Status Requirement Overreach**');
+  const sigEnd = offerNow.indexOf('### Output format:', Math.max(sigStart, 0));
+  const sigSection = sigStart >= 0 && sigEnd > sigStart ? offerNow.slice(sigStart, sigEnd) : '';
   if (
     sigSection.includes('templates/immigration-status-requirements.yml') &&
     sigSection.includes('config/profile.yml') &&
@@ -12302,9 +12320,9 @@ console.log('\n68. Immigration-status requirement overreach (#2033)');
     sigSection.includes('not legal advice') &&
     sigSection.includes('Render in {language.output}')
   ) {
-    pass('oferta Block G immigration-status signal pins jurisdiction derivation, skip-when-no-row, exceptions honesty (named hook instead of clean flag), the ITAR/EAR US-person note, statute-fact phrasing, and the not-legal-advice close (#2033)');
+    pass('offer Block G immigration-status signal pins jurisdiction derivation, skip-when-no-row, exceptions honesty (named hook instead of clean flag), the ITAR/EAR US-person note, statute-fact phrasing, and the not-legal-advice close (#2033)');
   } else {
-    fail('oferta Block G immigration-status signal missing/incomplete — needs table + profile.yml jurisdiction derivation, skip-when-no-row, exceptions honesty, ITAR/EAR note, statute-fact phrasing, {language.output} rendering, not-legal-advice note (#2033)');
+    fail('offer Block G immigration-status signal missing/incomplete — needs table + profile.yml jurisdiction derivation, skip-when-no-row, exceptions honesty, ITAR/EAR note, statute-fact phrasing, {language.output} rendering, not-legal-advice note (#2033)');
   }
 
   const stepStart = applyNow.indexOf('## Step 5d — Immigration-status screening check');
@@ -12359,7 +12377,7 @@ console.log('\n68. Immigration-status requirement overreach (#2033)');
 
 console.log('\n69. Jurisdiction-prohibited content signal (#2018)');
 
-// --- jurisdiction-prohibited content signal (#2018): table + oferta Block G + apply Step 5c ---
+// --- jurisdiction-prohibited content signal (#2018): table + offer Block G + apply Step 5c ---
 {
   try {
     const { load } = await import('js-yaml');
@@ -12393,9 +12411,9 @@ console.log('\n69. Jurisdiction-prohibited content signal (#2018)');
     offerMode.includes('not legal advice') &&
     offerMode.includes('never naive keyword matching')
   ) {
-    pass('oferta Block G signal 10 reads the jurisdiction table with agent-judged matching and a not-legal-advice note (#2018)');
+    pass('offer Block G signal 10 reads the jurisdiction table with agent-judged matching and a not-legal-advice note (#2018)');
   } else {
-    fail('oferta Block G missing the jurisdiction-prohibited content signal, table reference, or not-legal-advice note (#2018)');
+    fail('offer Block G missing the jurisdiction-prohibited content signal, table reference, or not-legal-advice note (#2018)');
   }
 
   if (

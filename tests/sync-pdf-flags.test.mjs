@@ -35,13 +35,13 @@ function runSync() {
     const pdfIndex = join(work, 'pdf-index.tsv');
     writeFileSync(tracker, TRACKER_HEADER);
     writeFileSync(pdfIndex, PDF_MANIFEST);
-    
+
     execFileSync(NODE, [join(ROOT, 'sync-pdf-flags.mjs')], {
       encoding: 'utf-8',
       timeout: 30000,
       env: { ...process.env, CAREER_OPS_TRACKER: tracker, CAREER_OPS_PDF_INDEX: pdfIndex },
     });
-    
+
     return readFileSync(tracker, 'utf-8');
   } finally {
     rmSync(work, { recursive: true, force: true });
@@ -51,7 +51,7 @@ function runSync() {
 try {
   const synced = runSync();
   const rows = synced.split('\n');
-  
+
   const acme = rows.find(l => /\bAcme\b/.test(l)) || '';
   if (/\|\s*✅\s*\|\s*\[1\]/.test(acme)) {
     pass('sync-pdf-flags flips ❌ to ✅ when present in manifest');

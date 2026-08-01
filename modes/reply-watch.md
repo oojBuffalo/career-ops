@@ -65,7 +65,7 @@ If the script identifies recommended updates (e.g. `Applied` → `Interview`), i
 Suggested status updates to apply:
   #2 Example Labs (Full-stack Engineer): Applied → Rejected
 
-Apply recommended status updates to data/applications.md? (y/N): 
+Apply recommended status updates to data/applications.md? (y/N):
 ```
 
 Type `y` or `yes` to apply the changes. The script will rewrite the matched rows in `data/applications.md` and rebuild the derived SQLite index.

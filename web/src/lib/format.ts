@@ -3,37 +3,14 @@
 // core: normalize-statuses.mjs (aliases) + the Go TUI dashboard (score/status
 // colours = the current state-of-the-art).
 
-// Spanish + legacy aliases → canonical English tokens (normalize-statuses.mjs).
+// Legacy English aliases → canonical tokens (normalize-statuses.mjs).
 const STATUS_ALIAS: Record<string, string> = {
-  evaluada: "EVALUATED",
-  evaluado: "EVALUATED",
-  condicional: "EVALUATED",
   hold: "EVALUATED",
-  evaluar: "EVALUATED",
-  verificar: "EVALUATED",
-  aplicada: "APPLIED",
-  aplicado: "APPLIED",
-  enviada: "APPLIED",
   sent: "APPLIED",
-  respondida: "RESPONDED",
-  respondido: "RESPONDED",
-  contestada: "RESPONDED",
-  entrevista: "INTERVIEW",
-  oferta: "OFFER",
-  rechazada: "REJECTED",
-  rechazado: "REJECTED",
-  descartada: "DISCARDED",
-  descartado: "DISCARDED",
-  cerrada: "DISCARDED",
-  cancelada: "DISCARDED",
-  duplicado: "DISCARDED",
+  dup: "DISCARDED",
   repost: "DISCARDED",
   monitor: "SKIP",
-  no_aplicar: "SKIP",
-  "no aplicar": "SKIP",
   // Hired — terminal success (offer accepted), added to states.yml in #2050.
-  contratado: "HIRED",
-  contratada: "HIRED",
   accepted: "HIRED",
   accept: "HIRED",
 };
@@ -95,9 +72,9 @@ export function scoreTone(score: string): "good" | "warn" | "bad" | "muted" {
 /** Block-G legitimacy tier → tone. */
 export function legitimacyTone(l: string): "good" | "warn" | "bad" | "muted" {
   const s = l.toLowerCase();
-  if (s.includes("high") || s.includes("confian") || s.includes("legit")) return "good";
-  if (s.includes("caution") || s.includes("precau") || s.includes("caut")) return "warn";
-  if (s.includes("suspic") || s.includes("sospech") || s.includes("scam") || s.includes("fake")) return "bad";
+  if (s.includes("high") || s.includes("legit")) return "good";
+  if (s.includes("caution") || s.includes("caut")) return "warn";
+  if (s.includes("suspic") || s.includes("scam") || s.includes("fake")) return "bad";
   return "muted";
 }
 
@@ -110,13 +87,10 @@ export type ReportMeta = {
 
 const FIELD_KEYS: Record<string, string> = {
   date: "Date",
-  fecha: "Date",
   url: "URL",
   archetype: "Archetype",
-  arquetipo: "Archetype",
   score: "Score",
   legitimacy: "Legitimacy",
-  legitimidad: "Legitimacy",
   pdf: "PDF",
 };
 
@@ -144,7 +118,7 @@ export function parseReport(md: string): ReportMeta {
   for (const l of headerLines) {
     const h = l.match(/^#\s+(.+)/);
     if (h) {
-      title = h[1].replace(/^Evaluat?i[oó]n:?\s*/i, "").trim();
+      title = h[1].replace(/^Evaluation:?\s*/i, "").trim();
       continue;
     }
     const m = l.match(/^\s*\*\*(.+?):\*\*\s*(.*)$/);

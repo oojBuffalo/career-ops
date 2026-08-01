@@ -137,7 +137,7 @@ function formatK(tokens) {
 export function formatBreakdown(accumulator, model, provider) {
   const lines = [];
   lines.push('Token breakdown:');
-  
+
   const steps = ['scan', 'evaluation', 'pdf payload'];
   // Ensure any other recorded steps are printed too
   for (const key of Object.keys(accumulator.steps)) {
@@ -149,7 +149,7 @@ export function formatBreakdown(accumulator, model, provider) {
   for (const step of steps) {
     const data = accumulator.steps[step] || { isZeroToken: true };
     const label = (step + ':').padEnd(15);
-    
+
     if (data.isZeroToken || (!data.prompt_tokens && !data.completion_tokens)) {
       lines.push(`  ${label}(zero-token by design)`);
     } else {

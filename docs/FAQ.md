@@ -58,7 +58,7 @@ From `templates/states.yml`: `Discarded` is "discarded by candidate or offer clo
 
 ## Is there only one CV template?
 
-No. `templates/` has `cv-template.html`, `cv-template.tex` (LaTeX/Overleaf), `cv-template.zh-minimal.html`, `resume-template.html`, `cover-letter-template.html`, plus `templates/sections/`. See also "Can I use my own CV template?" above.
+No. `templates/` has `cv-template.html`, `cv-template.tex` (LaTeX/Overleaf), `resume-template.html`, `cover-letter-template.html`, plus `templates/sections/`. See also "Can I use my own CV template?" above.
 
 ## Why does Chrome open during some scans but not others?
 

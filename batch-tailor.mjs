@@ -45,13 +45,13 @@ for (const line of lines) {
   if (!line || line.startsWith('id\t')) continue;
   const parts = line.split('\t');
   if (parts.length < 7) continue;
-  
+
   const id = parts[0];
   const url = parts[1];
   const status = parts[2];
   const reportNum = parts[5];
   const scoreStr = parts[6];
-  
+
   if (status === 'completed') {
     const score = parseFloat(scoreStr);
     if (!isNaN(score) && score >= minScore) {
@@ -72,13 +72,13 @@ const reports = existsSync(reportsDir) ? readdirSync(reportsDir) : [];
 for (let i = 0; i < toProcess.length; i++) {
   const job = toProcess[i];
   console.log(`\n[${i + 1}/${toProcess.length}] Tailoring CV for Report ${job.reportNum} (Score: ${job.score}) — ${job.url}`);
-  
+
   // Try to find the local report file to pass to the agent
   const matchingReport = reports.find(f => f.startsWith(`${job.reportNum}-`) && f.endsWith('.md'));
   const reportContext = matchingReport ? `\nThe evaluation report is available at: reports/${matchingReport}` : '';
-  
+
   const prompt = `Tailor the CV for this role and generate the HTML and PDF CVs. \nURL: ${job.url}\nReport number: ${job.reportNum}${reportContext}`;
-  
+
   const claudeArgs = [
     '-p',
     '--dangerously-skip-permissions',
@@ -86,7 +86,7 @@ for (let i = 0; i < toProcess.length; i++) {
     'modes/pdf.md',
     prompt
   ];
-  
+
   const res = spawnSync('claude', claudeArgs, { stdio: 'inherit' });
   if (res.error) {
     console.error(`Error running claude: ${res.error.message}`);

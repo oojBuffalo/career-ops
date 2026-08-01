@@ -166,4 +166,3 @@ try {
 } catch (e) {
   fail(`themuse provider tests crashed: ${e.message}`);
 }
-

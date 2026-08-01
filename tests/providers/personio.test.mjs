@@ -195,4 +195,3 @@ try {
 } catch (e) {
   fail(`personio provider tests crashed: ${e.message}`);
 }
-

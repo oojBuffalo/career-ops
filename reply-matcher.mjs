@@ -25,10 +25,10 @@ export function checkCompanyMatch(text, company) {
   if (!company || !text) return false;
   // Exact substring
   if (text.includes(company)) return true;
-  
+
   const textLower = text.toLowerCase();
   const compLower = company.toLowerCase();
-  
+
   if (textLower.includes(compLower)) return true;
 
   // Ignore spacing
@@ -45,7 +45,7 @@ export function checkCompanyMatch(text, company) {
 
 export function checkRoleMatch(text, role) {
   if (!role || !text) return false;
-  
+
   const tNorm = normalizeStr(text);
   const rNorm = normalizeStr(role);
   if (tNorm.includes(rNorm)) return true;
@@ -62,7 +62,7 @@ export function checkRoleMatch(text, role) {
   // Handle Chinese role titles ignoring symbols
   const cleanRole = role.replace(/[\s_\\/()-]+/g, '');
   if (cleanRole.length > 2 && tNorm.includes(cleanRole.toLowerCase())) return true;
-  
+
   return false;
 }
 
@@ -114,7 +114,7 @@ function addDomain(domains, value) {
 
 export function getAppDomains(app, followups) {
   const domains = new Set();
-  
+
   // Extract from notes
   if (app.notes) {
     const emails = app.notes.match(/[\w.-]+@[\w.-]+\.\w+/g) || [];
@@ -161,34 +161,34 @@ export function getAppDomains(app, followups) {
 
 export function matchCandidates(candidates, apps, followups = []) {
   const results = [];
-  
+
   for (const cand of candidates) {
     const textContext = `${cand.from || ''} ${cand.subject || ''} ${cand.body_snippet || ''}`;
     const fromDomain = extractDomain(cand.from);
-    
+
     let bestMatches = [];
     let highestScore = -1;
-    
+
     for (const app of apps) {
       let score = 0;
       let signals = [];
       let companyHint = '';
       let roleHint = '';
-      
+
       const isCompanyMatch = checkCompanyMatch(textContext, app.company);
       if (isCompanyMatch) {
         score += 2;
         signals.push('company-name');
         companyHint = app.company;
       }
-      
+
       const isRoleMatch = checkRoleMatch(textContext, app.role);
       if (isRoleMatch) {
         score += 1.5;
         signals.push('role-title');
         roleHint = app.role;
       }
-      
+
       let hasDomainMatch = false;
       if (fromDomain) {
         const appDomains = getAppDomains(app, followups);
@@ -202,9 +202,9 @@ export function matchCandidates(candidates, apps, followups = []) {
 
       const postAppKeywords = ['interview', 'offer', 'rejection', '邀您面试', '简历通过', 'next steps', 'update on your application'];
       const strongSignals = ['interview_invite', 'offer', 'rejection'];
-      const hasPostAppKeyword = (cand.signal && strongSignals.includes(cand.signal)) 
+      const hasPostAppKeyword = (cand.signal && strongSignals.includes(cand.signal))
         || postAppKeywords.some(k => textContext.toLowerCase().includes(k.toLowerCase()));
-      
+
       if (hasPostAppKeyword && (isCompanyMatch || hasDomainMatch)) {
          signals.push('post-application-keyword');
       }
@@ -220,7 +220,7 @@ export function matchCandidates(candidates, apps, followups = []) {
         } else if (isRoleMatch) {
           confidence = 'low';
         }
-        
+
         const matchInfo = {
           message_id: cand.message_id,
           company_hint: companyHint || app.company,
@@ -230,7 +230,7 @@ export function matchCandidates(candidates, apps, followups = []) {
           signals: Array.from(new Set(signals)),
           score
         };
-        
+
         if (score > highestScore) {
           highestScore = score;
           bestMatches = [matchInfo];
@@ -239,7 +239,7 @@ export function matchCandidates(candidates, apps, followups = []) {
         }
       }
     }
-    
+
     if (bestMatches.length === 1) {
       const match = bestMatches[0];
       delete match.score;
@@ -266,7 +266,7 @@ export function matchCandidates(candidates, apps, followups = []) {
       });
     }
   }
-  
+
   return results;
 }
 
@@ -434,4 +434,3 @@ export function classifyReply(cand) {
     suggestedTrackerUpdate: 'Needs Review'
   };
 }
-

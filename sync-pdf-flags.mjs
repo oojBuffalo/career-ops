@@ -82,10 +82,10 @@ let unchanged = 0;
 for (let i = 0; i < lines.length; i++) {
   const row = parseTrackerRow(lines[i], colmap);
   if (!row) continue;
-  
+
   const reportNums = extractTrackerReportNumbers(row.report);
   const hasPdf = reportNums.some(num => manifestReports.has(num));
-  
+
   if (hasPdf) {
     if (row.pdf !== '✅') {
       const parts = lines[i].split('|').map(s => s.trim());

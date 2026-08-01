@@ -122,4 +122,3 @@ try {
 } catch (e) {
   fail(`nodesk provider tests crashed: ${e.message}`);
 }
-

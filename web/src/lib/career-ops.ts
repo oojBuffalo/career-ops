@@ -281,8 +281,11 @@ const NOTES_START = "<!-- co-web-notes:start -->";
 const NOTES_END = "<!-- co-web-notes:end -->";
 
 /** Read back ONLY the web-assistant managed notes from modes/_profile.md (small,
- *  focused — the agent reads the rest of the canonical files itself). Falls back
- *  to the legacy web-only memory file for back-compat. */
+ *  focused — the agent reads the rest of the canonical files itself). modes/
+ *  _profile.md is the ONLY source: it is in scope for content generation per
+ *  AGENTS.md's source-of-truth boundary, unlike the legacy web-only
+ *  .career-ops-web/memory.md store, which is deliberately NOT read — facts that
+ *  should inform applications belong in the user-layer files. */
 export function readMemory(): string {
   try {
     const md = fs.readFileSync(profilePath(), "utf8");
@@ -292,11 +295,7 @@ export function readMemory(): string {
   } catch {
     /* no _profile.md yet */
   }
-  try {
-    return fs.readFileSync(path.join(careerOpsRoot(), ".career-ops-web", "memory.md"), "utf8").trim();
-  } catch {
-    return "";
-  }
+  return "";
 }
 
 /** Append a durable fact to the canonical modes/_profile.md (creating the file +

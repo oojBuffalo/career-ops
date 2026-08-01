@@ -308,4 +308,3 @@ try {
 } catch (e) {
   fail(`jibeapply provider tests crashed: ${e.message}`);
 }
-

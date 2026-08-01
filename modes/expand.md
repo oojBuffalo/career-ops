@@ -1,6 +1,6 @@
 # Mode: expand — Auto-discover and add missing competencies
 
-Fetch public sources linked in the user's `config/profile.yml` (e.g., GitHub username, portfolio URL) to discover competencies, projects, and work history. Merge missing items into their `cv.md` / `article-digest.md` using the existing `add-entry.mjs` engine. 
+Fetch public sources linked in the user's `config/profile.yml` (e.g., GitHub username, portfolio URL) to discover competencies, projects, and work history. Merge missing items into their `cv.md` / `article-digest.md` using the existing `add-entry.mjs` engine.
 
 > **Non-negotiables (from the project's source-of-truth rules in `_shared.md`):**
 > - **Confirm before write.** Present all deduped additions to the user and halt until explicit approval is given.
