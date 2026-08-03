@@ -1,0 +1,4 @@
+# Enforce the .editorconfig line-ending policy at the git layer: text files are
+# committed with LF. (providers/jobspresso.mjs slipped in as CRLF via the
+# v1.24.0 upstream merge — this prevents a recurrence.)
+* text=auto eol=lf

@@ -54,3 +54,9 @@ states:
     aliases: [skip, monitor]
     description: Doesn't fit, don't apply
     dashboard_group: skip
+
+  - id: hired
+    label: Hired
+    aliases: [accepted, accept]
+    description: Offer accepted, job landed!
+    dashboard_group: hired
